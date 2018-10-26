@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 
 {% block title %}
-	All Posts
+	{{ tag.name }}
 {% endblock %}
 
 {% block content_title %}
-	All Posts
+	Posts for tag: {{ tag.name }}
 {% endblock %}
 
 {% block content %}
 <div class="container">
-	{% for post in posts %}
+	{% for post in tag.posts %}
 	<div class="row">
 		<div class="col-md-12">		
 			<a href="{{ url_for('posts.post_detail',slug=post.slug) }}">{{ post.title }}</a>

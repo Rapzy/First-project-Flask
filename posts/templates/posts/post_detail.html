@@ -15,5 +15,14 @@
 			<p>{{ post.body }}</p>
 		</div>
 	</div>
+	<div class="row">
+		<div class="col-md-6">
+			{% for tag in post.tags %}
+				<a href="{{ url_for('posts.tag_detail', slug=tag.slug) }}">
+					<span class="badge badge-secondary">{{ tag.name }}</span>
+				</a>
+			{% endfor %}
+		</div>
+	</div>
 </div>
 {% endblock %}
