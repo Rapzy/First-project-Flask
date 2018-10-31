@@ -16,6 +16,26 @@
 					{{ field(class="form-control") }}
 				</div>
 		{% endfor %}
+		<div class="form-group">
+			<label class="d-block">Tags</label>
+			{% for tag in tags %}
+				<label class="badge badge-secondary" for="{{ tag.id }}" id="label-{{ tag.id }}">{{ tag.name }}</label>
+				<input type="checkbox" class="d-none" id="{{ tag.id }}" onchange="toggleCheckbox(this)" value="{{ tag.name }}" name='tags'>
+			{% endfor %}
+		</div> 
 		<button type="submit" class="btn btn-primary">Create</button>
 	</form>
+	<script>
+		function toggleCheckbox(checkbox) {
+			label = document.getElementById('label-'+checkbox.id);
+			if (checkbox.checked){
+				label.classList.remove("badge-secondary");
+				label.classList.add("badge-success");
+			}	
+			else{
+				label.classList.remove("badge-success");
+				label.classList.add("badge-secondary");
+			}
+		}
+	</script>
 {% endblock %}

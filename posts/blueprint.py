@@ -18,16 +18,21 @@ def create_post():
     if request.method == "POST":
         title = request.form['title']
         body = request.form['body']
+        tags = request.form.getlist('tags')
         try:
             post = Post(title=title, body=body)
+            for tag in tags:
+                obj_tag = Tag.query.filter(Tag.name == tag).first()
+                post.tags.append(obj_tag)
             db.session.add(post)
             db.session.commit()
         except:
             print('Error')
         return redirect(url_for('posts.index'))
     else:
+        tags = Tag.query.all()
         form = PostForm()
-        return render_template('posts/create_post.html', form=form)
+        return render_template('posts/create_post.html', form=form, tags=tags)
 
 
 @posts.route('/')
