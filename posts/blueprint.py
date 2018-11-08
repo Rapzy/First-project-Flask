@@ -38,11 +38,21 @@ def create_post():
 @posts.route('/')
 def index():
     query = request.args.get('query')
-    if query:
-        posts = Post.query.filter(Post.title.contains(query) | Post.body.contains(query)).all()
+    page = request.args.get('page')
+
+    if page and page.isdigit():
+        page = int(page)
     else:
-        posts = Post.query.all()
-    return render_template('posts/index.html', posts=posts)
+        page = 1
+
+    if query:
+        posts = Post.query.filter(Post.title.contains(query) | Post.body.contains(query))
+    else:
+        posts = Post.query
+
+    pages = posts.paginate(page=page, per_page=3)
+
+    return render_template('posts/index.html', pages=pages)
 
 
 @posts.route('/<slug>')

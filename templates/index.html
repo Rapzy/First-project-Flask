@@ -9,5 +9,7 @@
 {% endblock %}
 
 {% block content %}
-	<a href="{{ url_for('posts.create_post') }}" class="btn btn-success">Create Post</a>
+	<div class="container">
+		<a href="{{ url_for('posts.create_post') }}" class="btn btn-success">Create Post</a>
+	</div>
 {% endblock %}

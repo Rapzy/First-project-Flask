@@ -9,22 +9,24 @@
 {% endblock %}
 
 {% block content %}
-	<form action="{{ url_for('posts.create_post') }}" method="POST">
-		{% for field in form %}
-				<div class="form-group">
-					{{ field.label() }}
-					{{ field(class="form-control") }}
-				</div>
-		{% endfor %}
-		<div class="form-group">
-			<label class="d-block">Tags</label>
-			{% for tag in tags %}
-				<label class="badge badge-secondary" for="{{ tag.id }}" id="label-{{ tag.id }}">{{ tag.name }}</label>
-				<input type="checkbox" class="d-none" id="{{ tag.id }}" onchange="toggleCheckbox(this)" value="{{ tag.name }}" name='tags'>
+	<div class="container">
+		<form action="{{ url_for('posts.create_post') }}" method="POST">
+			{% for field in form %}
+					<div class="form-group">
+						{{ field.label() }}
+						{{ field(class="form-control") }}
+					</div>
 			{% endfor %}
-		</div> 
-		<button type="submit" class="btn btn-primary">Create</button>
-	</form>
+			<div class="form-group">
+				<label class="d-block">Tags</label>
+				{% for tag in tags %}
+					<label class="badge badge-secondary" for="{{ tag.id }}" id="label-{{ tag.id }}">{{ tag.name }}</label>
+					<input type="checkbox" class="d-none" id="{{ tag.id }}" onchange="toggleCheckbox(this)" value="{{ tag.name }}" name='tags'>
+				{% endfor %}
+			</div> 
+			<button type="submit" class="btn btn-primary">Create</button>
+		</form>
+	</div>
 	<script>
 		function toggleCheckbox(checkbox) {
 			label = document.getElementById('label-'+checkbox.id);

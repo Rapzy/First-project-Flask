@@ -17,11 +17,14 @@
 
 	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
+	      <li class="nav-item">
+	        <a class="nav-link {% if request.url_rule.endpoint == 'index' %}active{% endif %}" href="{{ url_for('index') }}">Home <span class="sr-only">(current)</span></a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="{{ url_for('posts.index') }}">Blog</a>
+	        <a class="nav-link {% if request.url_rule.endpoint == 'posts.index' %}active{% endif %}" href="{{ url_for('posts.index') }}">Blog</a>
+	      </li>
+	      <li class="nav-item">
+	      	<a href="{{ url_for('posts.create_post') }}" class="btn btn-outline-success">Create Post</a>
 	      </li>
 	    </ul>
 	    <form class="form-inline my-2 my-lg-0" method="GET" action="{{ url_for('posts.index') }}">
@@ -37,10 +40,8 @@
 				{% endblock %}
 			</h1>
 		</div>
-		<div class="row">
-			{% block content%}
-			{% endblock %}
-		</div>
 	</div>
+	{% block content%}
+	{% endblock %}
 </body>
 </html>
